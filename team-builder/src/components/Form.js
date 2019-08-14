@@ -40,33 +40,38 @@ const AddMemberButton = styled.button`
 const Form = (props) => {
 
     
+    const [member, setMember] = useState({ name: '', email: '', role: '' });
 
 
-// function that the submit button the form will call
-const submitForm = event => {
-    event.preventDefault();
-    const newMember = {
-    
-    }
+    const changeHandler = event => {
+        setMember({ ...member, [event.target.name]: event.target.value })
+    };
 
-};
+    // function that the submit button the form will call
+    const submitForm = event => {
+        event.preventDefault();
+        const newMember = { ...member, id: Date.now() }
+
+        props.addNewMember(newMember);
+        
+    };
 
   return (
 
-    <MemberForm>
+    <MemberForm onSubmit={submitForm}>
         <Name>
             <label htmlFor='name' hidden>Member Name</label>
-            <input name='name' type='text' placeholder='member name' />
+            <input name='name' type='text' placeholder='member name' value={member.name} onChange={changeHandler} />
         </Name>
 
         <Email>
             <label htmlFor='email' hidden>Email</label>
-            <input name='email' type='email' placeholder='email address' />
+            <input name='email' type='email' placeholder='email address' value={member.email} onChange={changeHandler} />
         </Email>
 
         <Role>
-            <label htmlFor='role' myAttr >Member Role</label>
-            <select name='role'> 
+            <label htmlFor='role' >Member Role</label>
+            <select name='role' onChange={changeHandler}> 
                 <option value=''>Select Position</option>
                 <option value='Backend Engineer'>Backend Engineer</option>
                 <option value='Frontend Engineer'>Frontend Engineer</option>

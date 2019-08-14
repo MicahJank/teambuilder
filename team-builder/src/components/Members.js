@@ -8,27 +8,34 @@ const NoMembers = styled.h3`
   text-align: center;
 `;
 
-const Members = ({ teamMembers }) => {
+const MemberCard = styled.div`
+  background-color: white;
+  border: 1px solid black;
+`;
 
-    
-    // I am putting in this conditional here because i know i will need to programatically create each new team member
-  // This component will need to take the array that will be assigned to teamMembers and
-  // map over it. So if i dont have this conditional then that .map wont work at the start because the array will
-  // return truthy and will cause an error on the .map function since there will be no items in it at the start.
-  //In other words, i need this so that i can avoid running the .map until my form has submitted actual data to the
-  // state
-    if (!teamMembers.teamMembers) {
+const Members = ({ memberList }) => {
+   
+    // memberList is the array of team members. Since it starts off as an empty array i need to check that there has been data passed through it before i start trying to display that
+    // data. So here i am checking if the memberList array contains any values, if it doesnt then that means a form hasnt been submitted yet so it shouldnt return any information. If
+    // there is data in the array, then it will skip this and will return the data down below to be rendered.
+    if (!memberList[0]) {
         return (
           <NoMembers>You have no Team Members yet!</NoMembers>
         );
       }
 
 
-      // this wont return until teamMembers returns true
+      // this wont return until memberList[0] returns true
     return (
-        <div>
-            List of Members will go here.
-        </div>
+      memberList.map((member, i) => {
+        return (
+          <MemberCard key={i}>
+            <h2>{member.name}</h2>
+            <h3>{member.email}</h3>
+            <h3>{member.role}</h3>
+          </MemberCard>
+        );
+      })
     );
 
 };

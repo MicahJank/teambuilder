@@ -39,6 +39,18 @@ const AddMemberButton = styled.button`
 
 const Form = (props) => {
 
+    
+
+
+// function that the submit button the form will call
+const submitForm = event => {
+    event.preventDefault();
+    const newMember = {
+    
+    }
+
+};
+
   return (
 
     <MemberForm>

@@ -30,7 +30,6 @@ function App() {
   // Member.js as a prop so that it can be updated according to the current member that has the 'edit' button clicked
   const editMember = member => {
     setMemberToEdit(member);
-    console.log(memberToEdit);
   };
 
   
@@ -38,7 +37,7 @@ function App() {
   return (
     <div className="App">
       <h1>Please Enter in a Team Member</h1>
-      <Form addNewMember={addNewMember} />
+      <Form addNewMember={addNewMember} memberToEdit={memberToEdit} />
       <Members memberList={teamMembers} editFunction={editMember} />
     </div>
   );

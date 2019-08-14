@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 
@@ -43,6 +43,10 @@ const Form = (props) => {
     const [member, setMember] = useState({ name: '', email: '', role: '' });
 
 
+    useEffect(() => {
+        setMember(props.memberToEdit);
+    }, [props.memberToEdit]);
+
     const changeHandler = event => {
         setMember({ ...member, [event.target.name]: event.target.value })
     };
@@ -55,6 +59,8 @@ const Form = (props) => {
         props.addNewMember(newMember);
         
     };
+
+
 
   return (
 
@@ -71,7 +77,7 @@ const Form = (props) => {
 
         <Role>
             <label htmlFor='role' >Member Role</label>
-            <select name='role' onChange={changeHandler}> 
+            <select name='role' value={member.role} onChange={changeHandler}> 
                 <option value=''>Select Position</option>
                 <option value='Backend Engineer'>Backend Engineer</option>
                 <option value='Frontend Engineer'>Frontend Engineer</option>

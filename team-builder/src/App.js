@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <h1>Please Enter in a Team Member</h1>
-      <Form />
+      <Form setTeamMemebers={setTeamMemebers} />
       <Members teamMembers={teamMembers} />
     </div>
   );

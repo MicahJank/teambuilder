@@ -30,8 +30,14 @@ const Role = styled.div`
     margin-bottom: 20px;
 `;
 
+const AddMemberButton = styled.button`
 
-const Form = () => {
+    padding: 10px;
+
+`;
+
+
+const Form = (props) => {
 
   return (
 
@@ -48,8 +54,18 @@ const Form = () => {
 
         <Role>
             <label htmlFor='role' myAttr >Member Role</label>
-            <select name='role' type='' />
+            <select name='role'> 
+                <option value=''>Select Position</option>
+                <option value='Backend Engineer'>Backend Engineer</option>
+                <option value='Frontend Engineer'>Frontend Engineer</option>
+                <option value='UX Designer'>Designer</option>
+                <option value='Project Manager'>Project Manager</option>
+                <option value='Tester'>Tester</option>
+                <option value='Coffee Maker'>Coffee Maker</option>
+            </select>
         </Role>
+
+        <AddMemberButton type='submit'>Add Member</AddMemberButton>
     </MemberForm>
   );
 

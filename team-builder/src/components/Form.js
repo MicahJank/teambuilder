@@ -41,10 +41,16 @@ const Form = (props) => {
 
     
     const [member, setMember] = useState({ name: '', email: '', role: '' });
+    const [buttonState, setButtonState] = useState('Add Member');
 
 
     useEffect(() => {
         setMember(props.memberToEdit);
+        if(props.memberToEdit) {
+            setButtonState('Apply Changes');
+        }
+      
+
     }, [props.memberToEdit]);
 
     const changeHandler = event => {
@@ -56,8 +62,16 @@ const Form = (props) => {
         event.preventDefault();
         const newMember = { ...member, id: Date.now() }
 
-        props.addNewMember(newMember);
-        
+        if (props.memberToEdit) {
+            props.changeInfoFunction(member);
+        } else {
+            props.addNewMember(newMember);
+        }
+
+        // resets the form every time a member is added
+        setMember({ name: '', email: '', role: '' });
+        // Same as above
+        setButtonState('Add Member');
     };
 
 
@@ -88,7 +102,7 @@ const Form = (props) => {
             </select>
         </Role>
 
-        <AddMemberButton type='submit'>Add Member</AddMemberButton>
+        <AddMemberButton type='submit'>{buttonState}</AddMemberButton>
     </MemberForm>
   );
 

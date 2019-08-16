@@ -16,7 +16,7 @@ function App() {
   const [teamMembers, setTeamMembers] = useState([]);
 
   // this hook will be used to edit the individual information of each member
-  const [memberToEdit, setMemberToEdit] = useState({})
+  const [memberToEdit, setMemberToEdit] = useState(false);
 
   // this function will be passed down to the form component because the form is where we want to actually
   // create the new member. Here we can see that we are setting the state of teamMembers and
@@ -32,12 +32,19 @@ function App() {
     setMemberToEdit(member);
   };
 
+  const changeMemberInfo = editedMember => {
+    const editedTeamMembers = teamMembers.map(arrayMember => {
+      return arrayMember.id === editedMember.id ? editedMember : arrayMember;
+    });
+    setTeamMembers(editedTeamMembers);
+    setMemberToEdit(false);
+  };
   
 
   return (
     <div className="App">
       <h1>Please Enter in a Team Member</h1>
-      <Form addNewMember={addNewMember} memberToEdit={memberToEdit} />
+      <Form addNewMember={addNewMember} memberToEdit={memberToEdit} changeInfoFunction={changeMemberInfo}/>
       <Members memberList={teamMembers} editFunction={editMember} />
     </div>
   );
